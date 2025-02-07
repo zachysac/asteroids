@@ -22,13 +22,13 @@ class Player(CircleShape):
     def draw(self,screen):
         pygame.draw.polygon(screen,"white",self.triangle(),2)
     #rotation degree calculator
-    def rotate(self,dt):
-        rotation += (PLAYER_TURN_SPEED * dt)
+    def rotate(self,rotation):
+        self.rotation += (PLAYER_TURN_SPEED * rotation)
     #update rotation
     def update(self, dt):
         keys = pygame.key.get_pressed()
 
         if keys[pygame.K_a]:
-            pass
+            self.rotate(dt*-1)
         if keys[pygame.K_d]:
-            pass
+            self.rotate(dt)
