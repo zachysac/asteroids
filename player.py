@@ -1,7 +1,7 @@
 #import pygame
 import pygame
 #imports constants
-from constants import PLAYER_RADIUS
+from constants import PLAYER_RADIUS,PLAYER_TURN_SPEED
 #player class that inherits CircleShape
 from circleshape import CircleShape
 class Player(CircleShape):
@@ -21,3 +21,14 @@ class Player(CircleShape):
     #drawing player shape
     def draw(self,screen):
         pygame.draw.polygon(screen,"white",self.triangle(),2)
+    #rotation degree calculator
+    def rotate(self,dt):
+        rotation += (PLAYER_TURN_SPEED * dt)
+    #update rotation
+    def update(self, dt):
+        keys = pygame.key.get_pressed()
+
+        if keys[pygame.K_a]:
+            pass
+        if keys[pygame.K_d]:
+            pass
