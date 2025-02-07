@@ -1,10 +1,11 @@
+#import pygame
+import pygame
+#imports constants
+from constants import PLAYER_RADIUS
 #player class that inherits CircleShape
 from circleshape import CircleShape
-from constants import PLAYER_RADIUS
 class Player(CircleShape):
     def __init__(self,x,y):
-        self.x = x
-        self.y = y
         super().__init__(x,y,PLAYER_RADIUS)
         self.rotation = 0
     
@@ -16,3 +17,7 @@ class Player(CircleShape):
         b = self.position - forward * self.radius - right
         c = self.position - forward * self.radius + right
         return [a, b, c]
+    
+    #drawing player shape
+    def draw(self,screen):
+        pygame.draw.polygon(screen,"white",self.triangle(),2)
