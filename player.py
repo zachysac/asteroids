@@ -6,10 +6,10 @@ from constants import *
 from circleshape import CircleShape
 from shot import Shot
 class Player(CircleShape):
+    shot_cooldown = 0
     def __init__(self,x,y):
         super().__init__(x,y,PLAYER_RADIUS)
         self.rotation = 0
-    
     # player visual shape (hitbox is circle)
     def triangle(self):
         forward = pygame.Vector2(0, 1).rotate(self.rotation)
@@ -42,7 +42,11 @@ class Player(CircleShape):
             self.move(-dt)
         #shoots
         if keys[pygame.K_SPACE]:
-            self.shoot()
+            if self.shot_cooldown > 0:
+                self.shot_cooldown -= dt
+            else:
+                self.shoot()
+                self.shot_cooldown = PLAYER_SHOOT_COOLDOWN
     #moves player forward
     def move(self,dt):
         forward = pygame.Vector2(0, 1).rotate(self.rotation)
@@ -52,3 +56,4 @@ class Player(CircleShape):
         shot = Shot(self.position.x, self.position.y)
         forward = pygame.Vector2(0, 1).rotate(self.rotation)
         shot.velocity = forward * PLAYER_SHOOT_SPEED
+    
