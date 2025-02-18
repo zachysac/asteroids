@@ -2,6 +2,7 @@
 # the open-source pygame library
 # throughout this file
 import pygame
+import sys
 from constants import *
 from player import Player
 from asteroid import Asteroid
@@ -39,7 +40,12 @@ def main():
         for asteroid in asteroids:
             if player.collision(asteroid) == True:
                 print("Game over!")
-                pygame.quit()
+                sys.exit()
+        
+            for shot in shots:
+                if asteroid.collision(shot) == True:
+                    asteroid.kill()
+                    shot.kill()
 
         screen.fill(color=(0,0,0))
     
